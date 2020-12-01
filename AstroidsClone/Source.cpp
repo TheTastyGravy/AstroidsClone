@@ -1,20 +1,10 @@
-#include <raylib.h>
+#include "GameApp.h"
+
 
 int main()
 {
-	InitWindow(500, 500, "name");
-	SetTargetFPS(60);
+	GameApp game;
+	game.run();
 
-	while (!WindowShouldClose())
-	{
-		BeginDrawing();
-
-		ClearBackground(WHITE);
-		DrawFPS(10, 10);
-
-		EndDrawing();
-	}
-
-	CloseWindow();
 	return 0;
 }
