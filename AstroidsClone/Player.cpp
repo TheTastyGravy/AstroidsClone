@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Projectile.h"
+#include <string>
 
 
 Player::Player(Vector2 position, float rotation, Vector2 screenSize, float acceleration, float rotationSpeed, float maxSpeed, float friction) :
@@ -9,7 +10,8 @@ Player::Player(Vector2 position, float rotation, Vector2 screenSize, float accel
 	rotSpeed(rotationSpeed),
 	maxSpeed(maxSpeed),
 	friction(friction),
-	screenSize(screenSize)
+	screenSize(screenSize),
+	score(0)
 {
 	addTag(Tag::Player);
 }
@@ -39,6 +41,11 @@ void Player::draw()
 	v3 = Vector2Add(v3, position);
 
 	DrawTriangleLines(v1, v2, v3, WHITE);
+
+
+	//display score
+	DrawText(("score: " + std::to_string(score)).c_str(), 10, 10, 25, WHITE);
+	
 }
 
 void Player::update(float deltaTime)
@@ -122,5 +129,6 @@ void Player::update(float deltaTime)
 
 void Player::damage()
 {
-
+	score -= 1000;
+	position = Vector2Scale(screenSize, 0.5f);
 }

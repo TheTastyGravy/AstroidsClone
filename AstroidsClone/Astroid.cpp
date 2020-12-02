@@ -68,10 +68,14 @@ void Astroid::update(float deltaTime)
 	std::vector<GameObject*> projs = GameObjectPool::searchForTag(Tag::Projectile);
 	for (int i = 0; i < projs.size(); i++)
 	{
-		if (CheckCollisionPointCircle(projs[i]->getPos(), position, size))
+		Rectangle rec = { projs[i]->getPos().x, projs[i]->getPos().y, 4, 4 };
+
+		if (CheckCollisionCircleRec(position, size, rec))
 		{
+			static_cast<Player*>(player)->addScore(50 * (15 - size));
+
 			//create new small astroids if not too small
-			if (size > 2)
+			if (size > 4)
 			{
 				new Astroid(position, std::rand() % 360, screenSize, size - 2, Vector2Length(velocity) + 20);
 				new Astroid(position, std::rand() % 360, screenSize, size - 2, Vector2Length(velocity) + 20);

@@ -12,6 +12,7 @@ public:
 	void draw() override;
 
 	void damage();
+	void addScore(int score) { this->score += score; }
 
 private:
 	Vector2 velocity;
@@ -24,4 +25,6 @@ private:
 
 
 	Vector2 screenSize;
+
+	int score;
 };

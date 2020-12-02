@@ -42,7 +42,6 @@ void GameApp::draw(std::vector<GameObject*>& objects)
 	for (auto object : objects)
 	{ object->draw(); }
 
-	DrawFPS(5, 5);
 	EndDrawing();
 }
 
@@ -56,7 +55,10 @@ void GameApp::startup(Vector2 screenSize)
 	// Create player
 	new Player({ SCREEN_WIDTH * 0.5f, SCREEN_HIGHT * 0.5f }, 0, { (float)SCREEN_WIDTH, (float)SCREEN_HIGHT }, 200, 250, 200, 0.3f);
 
-	new Astroid({ 100, 100 }, 0, { (float)SCREEN_WIDTH, (float)SCREEN_HIGHT }, 10, 100);
+	//create random astroids
+	new Astroid({ (float)(rand() % SCREEN_WIDTH), (float)(rand() % SCREEN_HIGHT) }, rand() % 360, { (float)SCREEN_WIDTH, (float)SCREEN_HIGHT }, 16, 100);
+	new Astroid({ (float)(rand() % SCREEN_WIDTH), (float)(rand() % SCREEN_HIGHT) }, rand() % 360, { (float)SCREEN_WIDTH, (float)SCREEN_HIGHT }, 16, 100);
+	new Astroid({ (float)(rand() % SCREEN_WIDTH), (float)(rand() % SCREEN_HIGHT) }, rand() % 360, { (float)SCREEN_WIDTH, (float)SCREEN_HIGHT }, 16, 100);
 }
 
 void GameApp::shutdown()
