@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 #include "GameObject.h"
 
 
@@ -17,11 +18,15 @@ public:
 	void startup(Vector2 screenSize);
 	void shutdown();
 
+	void startGame();
+
 protected:
 	const int SCREEN_WIDTH = 1000;
 	const int SCREEN_HIGHT = 600;
 
+	bool isPaused = false;
+	std::string scoreText;
+
 	Shader shader;
 	RenderTexture2D target;
-	Camera2D cam;
 };

@@ -59,5 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="scanlines.fs" />
+    <None Include="fisheye.fs" />
   </ItemGroup>
 </Project>

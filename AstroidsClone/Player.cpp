@@ -1,10 +1,12 @@
 #include "Player.h"
 #include "Projectile.h"
 #include <string>
+#include "GameApp.h"
 
 
 Player::Player(Vector2 position, float rotation, Vector2 screenSize, float acceleration, float rotationSpeed, float maxSpeed, float friction) :
 	GameObject(position, rotation),
+	isGameOver(false),
 	velocity(Vector2()),
 	acceleration(acceleration),
 	rotSpeed(rotationSpeed),
@@ -13,7 +15,8 @@ Player::Player(Vector2 position, float rotation, Vector2 screenSize, float accel
 	isInvulnerable(false),
 	timer(0),
 	screenSize(screenSize),
-	score(0)
+	score(0),
+	lives(1)
 {
 	addTag(Tag::Player);
 }
@@ -53,7 +56,8 @@ void Player::draw()
 
 	// Display score in top left corner
 	DrawText(("score: " + std::to_string(score)).c_str(), 10, 10, 25, WHITE);
-	
+	// Display lives in top right corner
+	DrawText(("lives: " + std::to_string(lives)).c_str(), screenSize.x - 100, 10, 25, WHITE);
 }
 
 void Player::update(float deltaTime)
@@ -147,11 +151,18 @@ void Player::damage()
 	if (isInvulnerable)
 	{ return; }
 
-	score -= 1000;
+	//score -= 1000;
 	position = Vector2Scale(screenSize, 0.5f);
 	velocity = Vector2Zero();
 	rotation = 0;
 
 	isInvulnerable = true;
 	timer = 0;
+	lives--;
+
+
+	if (lives == 0)
+	{
+		isGameOver = true;
+	}
 }

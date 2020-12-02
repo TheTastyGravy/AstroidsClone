@@ -72,7 +72,7 @@ void Astroid::update(float deltaTime)
 
 		if (CheckCollisionCircleRec(position, size, rec))
 		{
-			static_cast<Player*>(player)->addScore(50 * (15 - size));
+			static_cast<Player*>(player)->addScore(50 * (20 - size));
 
 			//create new smaller astroids if not too small
 			if (size > 4)

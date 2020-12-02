@@ -14,6 +14,10 @@ public:
 	void damage();
 	void addScore(int score) { this->score += score; }
 
+	//checked by gameapp
+	bool isGameOver;
+	int score;
+
 private:
 	Vector2 velocity;
 
@@ -29,5 +33,5 @@ private:
 
 	Vector2 screenSize;
 
-	int score;
+	int lives;
 };
