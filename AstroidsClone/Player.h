@@ -23,6 +23,9 @@ private:
 	float maxSpeed;
 	float friction;
 
+	bool isInvulnerable;
+	float timer;
+
 
 	Vector2 screenSize;
 

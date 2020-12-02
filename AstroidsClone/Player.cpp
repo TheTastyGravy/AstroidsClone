@@ -10,6 +10,8 @@ Player::Player(Vector2 position, float rotation, Vector2 screenSize, float accel
 	rotSpeed(rotationSpeed),
 	maxSpeed(maxSpeed),
 	friction(friction),
+	isInvulnerable(false),
+	timer(0),
 	screenSize(screenSize),
 	score(0)
 {
@@ -24,10 +26,7 @@ Player::~Player()
 
 void Player::draw()
 {
-	// Find the corners for an isosceles triangle pointing in the direction of movement
-	//if (velocity.x != 0.0f || velocity.y != 0.0f)
-		//rotation = (float)atan2(velocity.y, velocity.x) * (180 / PI);
-
+	// Display player as a triangle
 	Vector2 v1 = { 6, 0 };
 	v1 = Vector2Rotate(v1, rotation);
 	v1 = Vector2Add(v1, position);
@@ -40,22 +39,40 @@ void Player::draw()
 	v3 = Vector2Rotate(v3, rotation);
 	v3 = Vector2Add(v3, position);
 
-	DrawTriangleLines(v1, v2, v3, WHITE);
+	// Blink while invulnerable
+	if (isInvulnerable)
+	{
+		int val = floor(timer);
+		DrawTriangleLines(v1, v2, v3, (timer - val < 0.5f) ? WHITE : DARKGRAY);
+	}
+	else
+	{
+		DrawTriangleLines(v1, v2, v3, WHITE);
+	}
 
 
-	//display score
+	// Display score in top left corner
 	DrawText(("score: " + std::to_string(score)).c_str(), 10, 10, 25, WHITE);
 	
 }
 
 void Player::update(float deltaTime)
 {
+	if (isInvulnerable)
+	{
+		timer += deltaTime;
+		if (timer > 3.0f)
+		{
+			isInvulnerable = false;
+		}
+	}
+
+
 	Vector2 force{ 0, 0 };
 	// Get movement input
 	if (IsKeyDown(KEY_W))
 		force.y = -1;
 	
-
 	// Normalise so diagnals arnt faster, and multiply by the speed
 	if (force.x != 0.0f && force.y != 0.0f)
 	{ force = Vector2Normalize(force); }
@@ -112,23 +129,29 @@ void Player::update(float deltaTime)
 	{ newPos.y -= screenSize.y; }
 
 
-	//check colision with astroids
-
-
 	// Update the agents position
 	position = newPos;
 
 
-	//shooting
-	if (IsKeyPressed(KEY_SPACE))
+	// Shoot on space
+	if (IsKeyPressed(KEY_SPACE) && !isInvulnerable)
 	{
-		Projectile* proj = new Projectile(position, rotation, 400);
+		new Projectile(position, rotation, 400);
 	}
 }
 
 
 void Player::damage()
 {
+	//cant be hit
+	if (isInvulnerable)
+	{ return; }
+
 	score -= 1000;
 	position = Vector2Scale(screenSize, 0.5f);
+	velocity = Vector2Zero();
+	rotation = 0;
+
+	isInvulnerable = true;
+	timer = 0;
 }

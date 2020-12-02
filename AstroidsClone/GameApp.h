@@ -20,4 +20,8 @@ public:
 protected:
 	const int SCREEN_WIDTH = 1000;
 	const int SCREEN_HIGHT = 600;
+
+	Shader shader;
+	RenderTexture2D target;
+	Camera2D cam;
 };

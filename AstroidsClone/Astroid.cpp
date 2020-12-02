@@ -53,10 +53,9 @@ void Astroid::update(float deltaTime)
 
 
 
-	//get player rect
+	// Check for collision with player
 	Vector2 pos = player->getPos();
 	Rectangle playerRect = { pos.x - 6, pos.y - 6, 12, 12 };
-	
 	if (CheckCollisionCircleRec(position, size, playerRect))
 	{
 		//damage player
@@ -64,23 +63,32 @@ void Astroid::update(float deltaTime)
 	}
 
 
-	//check for collision with projectiles
+	// Check for collision with projectiles
 	std::vector<GameObject*> projs = GameObjectPool::searchForTag(Tag::Projectile);
 	for (int i = 0; i < projs.size(); i++)
 	{
+		//use rect for projectile hit box
 		Rectangle rec = { projs[i]->getPos().x, projs[i]->getPos().y, 4, 4 };
 
 		if (CheckCollisionCircleRec(position, size, rec))
 		{
 			static_cast<Player*>(player)->addScore(50 * (15 - size));
 
-			//create new small astroids if not too small
+			//create new smaller astroids if not too small
 			if (size > 4)
 			{
-				new Astroid(position, std::rand() % 360, screenSize, size - 2, Vector2Length(velocity) + 20);
-				new Astroid(position, std::rand() % 360, screenSize, size - 2, Vector2Length(velocity) + 20);
+				for (int i = 0; i < 2; i++)
+				{
+					//get random angle in a direction off this astroid
+					float randVal = rand() % 130;
+					randVal -= 65;
+					randVal = rotation - randVal;
+
+					new Astroid(position, randVal, screenSize, size - 2, Vector2Length(velocity) + 20);
+				}
 			}
 			
+			//delete the projectile and this astroid
 			delete(projs[i]);
 			delete(this);
 		}
