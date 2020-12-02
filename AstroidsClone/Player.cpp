@@ -38,7 +38,7 @@ void Player::draw()
 	v3 = Vector2Rotate(v3, rotation);
 	v3 = Vector2Add(v3, position);
 
-	DrawTriangle(v1, v2, v3, RED);
+	DrawTriangleLines(v1, v2, v3, WHITE);
 }
 
 void Player::update(float deltaTime)
@@ -117,4 +117,10 @@ void Player::update(float deltaTime)
 	{
 		Projectile* proj = new Projectile(position, rotation, 400);
 	}
+}
+
+
+void Player::damage()
+{
+
 }

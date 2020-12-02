@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Astroid.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectPool.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Astroid.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectPool.h" />

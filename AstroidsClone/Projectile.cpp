@@ -5,7 +5,7 @@ Projectile::Projectile(Vector2 position, float rotation, float speed) :
 	GameObject(position, rotation),
 	timer(0)
 {
-	// Velocity is speed in the worward direction
+	// Velocity is speed in the forward direction
 	velocity = { 0, speed };
 	velocity = Vector2Rotate(velocity, rotation - 90);
 }
@@ -32,9 +32,9 @@ void Projectile::update(float deltaTime)
 
 void Projectile::draw()
 {
-	Vector2 offset = { 10, 0 };
+	Vector2 offset = { 7, 0 };
 	offset = Vector2Rotate(offset, rotation);
 
 	// Start and end point are offset
-	DrawLineEx(Vector2Add(position, offset), Vector2Subtract(position, offset), 3, RED);
+	DrawLineEx(Vector2Add(position, offset), Vector2Subtract(position, offset), 1, RED);
 }

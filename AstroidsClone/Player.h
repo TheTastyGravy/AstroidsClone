@@ -11,6 +11,8 @@ public:
 	void update(float deltaTime) override;
 	void draw() override;
 
+	void damage();
+
 private:
 	Vector2 velocity;
 

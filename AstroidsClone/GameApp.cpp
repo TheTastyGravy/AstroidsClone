@@ -5,6 +5,7 @@
 #include "GameObjectPool.h"
 
 #include "Player.h"
+#include "Astroid.h"
 
 
 void GameApp::run()
@@ -35,7 +36,7 @@ void GameApp::update(std::vector<GameObject*>& objects)
 void GameApp::draw(std::vector<GameObject*>& objects)
 {
 	BeginDrawing();
-	ClearBackground(DARKGRAY);
+	ClearBackground(BLACK);
 
 	// Draw objects
 	for (auto object : objects)
@@ -54,6 +55,8 @@ void GameApp::startup(Vector2 screenSize)
 
 	// Create player
 	new Player({ SCREEN_WIDTH * 0.5f, SCREEN_HIGHT * 0.5f }, 0, { (float)SCREEN_WIDTH, (float)SCREEN_HIGHT }, 200, 250, 200, 0.3f);
+
+	new Astroid({ 100, 100 }, 0, { (float)SCREEN_WIDTH, (float)SCREEN_HIGHT }, 10, 100);
 }
 
 void GameApp::shutdown()
