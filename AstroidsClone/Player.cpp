@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Projectile.h"
 
 
 Player::Player(Vector2 position, float rotation, Vector2 screenSize, float acceleration, float rotationSpeed, float maxSpeed, float friction) :
@@ -112,4 +113,8 @@ void Player::update(float deltaTime)
 
 
 	//shooting
+	if (IsKeyPressed(KEY_SPACE))
+	{
+		Projectile* proj = new Projectile(position, rotation, 400);
+	}
 }

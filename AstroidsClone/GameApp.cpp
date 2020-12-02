@@ -28,14 +28,14 @@ void GameApp::update(std::vector<GameObject*>& objects)
 	float deltaTime = GetFrameTime();
 
 	// Update objects
-	for (auto object : objects)
-	{ object->update(deltaTime); }
+	for (int i = 0; i < objects.size(); i++)
+	{ objects[i]->update(deltaTime); }
 }
 
 void GameApp::draw(std::vector<GameObject*>& objects)
 {
 	BeginDrawing();
-	ClearBackground(RAYWHITE);
+	ClearBackground(DARKGRAY);
 
 	// Draw objects
 	for (auto object : objects)
