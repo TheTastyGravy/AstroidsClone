@@ -4,6 +4,8 @@
 #include "raylib.h"
 #include "GameObjectPool.h"
 
+#include "Player.h"
+
 
 void GameApp::run()
 {
@@ -49,6 +51,9 @@ void GameApp::startup(Vector2 screenSize)
 	// Setup window
 	InitWindow(SCREEN_WIDTH, SCREEN_HIGHT, "AI Project");
 	SetTargetFPS(60);
+
+	// Create player
+	new Player({ SCREEN_WIDTH * 0.5f, SCREEN_HIGHT * 0.5f }, 0, { (float)SCREEN_WIDTH, (float)SCREEN_HIGHT }, 200, 250, 200, 0.3f);
 }
 
 void GameApp::shutdown()
