@@ -8,6 +8,9 @@ Projectile::Projectile(Vector2 position, float rotation, float speed) :
 	// Velocity is speed in the forward direction
 	velocity = { 0, speed };
 	velocity = Vector2Rotate(velocity, rotation - 90);
+
+
+	addTag(Tag::Projectile);
 }
 
 Projectile::~Projectile()

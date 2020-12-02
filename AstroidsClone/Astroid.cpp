@@ -62,6 +62,25 @@ void Astroid::update(float deltaTime)
 		//damage player
 		static_cast<Player*>(player)->damage();
 	}
+
+
+	//check for collision with projectiles
+	std::vector<GameObject*> projs = GameObjectPool::searchForTag(Tag::Projectile);
+	for (int i = 0; i < projs.size(); i++)
+	{
+		if (CheckCollisionPointCircle(projs[i]->getPos(), position, size))
+		{
+			//create new small astroids if not too small
+			if (size > 2)
+			{
+				new Astroid(position, std::rand() % 360, screenSize, size - 2, Vector2Length(velocity) + 20);
+				new Astroid(position, std::rand() % 360, screenSize, size - 2, Vector2Length(velocity) + 20);
+			}
+			
+			delete(projs[i]);
+			delete(this);
+		}
+	}
 }
 
 void Astroid::draw()

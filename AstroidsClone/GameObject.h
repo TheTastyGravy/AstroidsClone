@@ -6,7 +6,8 @@
 enum class Tag
 {
 	Player,
-	Astroid
+	Astroid,
+	Projectile
 };
 
 
