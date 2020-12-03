@@ -160,7 +160,6 @@
     <ClInclude Include="Projectile.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="fisheye.fs" />
     <None Include="scanlines.fs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -16,7 +16,7 @@ Player::Player(Vector2 position, float rotation, Vector2 screenSize, float accel
 	timer(0),
 	screenSize(screenSize),
 	score(0),
-	lives(1)
+	lives(3)
 {
 	addTag(Tag::Player);
 }
@@ -151,17 +151,17 @@ void Player::damage()
 	if (isInvulnerable)
 	{ return; }
 
-	//score -= 1000;
+	//reset to center
 	position = Vector2Scale(screenSize, 0.5f);
 	velocity = Vector2Zero();
-	rotation = 0;
+	rotation = 270;
 
 	isInvulnerable = true;
 	timer = 0;
 	lives--;
 
 
-	if (lives == 0)
+	if (lives < 0)
 	{
 		isGameOver = true;
 	}

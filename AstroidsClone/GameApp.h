@@ -15,7 +15,7 @@ public:
 	void update(std::vector<GameObject*>& objects);
 	void draw(std::vector<GameObject*>& objects);
 
-	void startup(Vector2 screenSize);
+	void startup();
 	void shutdown();
 
 	void startGame();
